@@ -7,7 +7,7 @@ package com.ciclo3.Reto3.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,22 +27,22 @@ public class Reservas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idReservation;
-    private LocalDate startDate;
-    private LocalDate devolutionDate;
+    private Date startDate;
+    private Date devolutionDate;
     private String status = "created";
- 
+
     //Relacion Car
     @ManyToOne
     @JoinColumn(name = "idCar")
-    @JsonIgnoreProperties({"reservations","car"})
+    @JsonIgnoreProperties({"reservations", "car"})
     private Car car;
-   
+
     //Relacion Cliente
     @ManyToOne
     @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"reservations","client","messages"})
+    @JsonIgnoreProperties({"reservations", "client", "messages"})
     private Clientes client;
-    
+
     private String score;
 
     public String getStatus() {
@@ -61,9 +61,6 @@ public class Reservas implements Serializable {
         this.score = score;
     }
 
-   
-  
-    
     public Integer getIdReservation() {
         return idReservation;
     }
@@ -72,19 +69,19 @@ public class Reservas implements Serializable {
         this.idReservation = idReservation;
     }
 
-    public LocalDate getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getDevolutionDate() {
+    public Date getDevolutionDate() {
         return devolutionDate;
     }
 
-    public void setDevolutionDate(LocalDate devolutionDate) {
+    public void setDevolutionDate(Date devolutionDate) {
         this.devolutionDate = devolutionDate;
     }
 
@@ -104,9 +101,4 @@ public class Reservas implements Serializable {
         this.car = car;
     }
 
- 
-
-    
-
-    
 }
