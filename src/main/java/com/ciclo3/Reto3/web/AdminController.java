@@ -5,8 +5,8 @@
  */
 package com.ciclo3.Reto3.web;
 
-import com.ciclo3.Reto3.model.Reservas;
-import com.ciclo3.Reto3.service.ReservasService;
+import com.ciclo3.Reto3.model.Admin;
+import com.ciclo3.Reto3.service.AdminService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,37 +28,38 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Andres
  */
 @RestController
-@RequestMapping("/api/Reservation")
+@RequestMapping("/api/Admin")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class ReservasController {
+public class AdminController {
 
     @Autowired
-    private ReservasService reservasService;
+    private AdminService adminService;
 
     @GetMapping("/all")
-    public List<Reservas> getPapelerias() {
-        return reservasService.getAll();
+    public List<Admin> getAdmins() {
+        return adminService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Reservas> getPapeleria(@PathVariable("id") int id) {
-        return reservasService.getReserva(id);
+    public Optional<Admin> getAdmin(@PathVariable("id") int id) {
+        return adminService.getAdmin(id);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservas save(@RequestBody Reservas p) {
-        return reservasService.save(p);
+    public Admin save(@RequestBody Admin p) {
+        return adminService.save(p);
     }
+
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservas update(@RequestBody Reservas c){
-        return reservasService.update(c);
+    public Admin update(@RequestBody Admin c) {
+        return adminService.update(c);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean deleteCategoria(@PathVariable("id") int id){
-        return reservasService.deleteReservation(id);
+    public boolean deleteAdmin(@PathVariable("id") int id) {
+        return adminService.deleteAdmin(id);
     }
 }

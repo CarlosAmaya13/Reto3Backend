@@ -42,4 +42,27 @@ public class MensajesService {
             }
         }
     }
+
+    public Mensajes update(Mensajes c) {
+        if (c.getIdMessage() != null) {
+            Optional<Mensajes> g = mensajesRepository.getMensaje(c.getIdMessage());
+            if (!g.isEmpty()) {
+                if (c.getMessageText() != null) {
+                    g.get().setMessageText(c.getMessageText());
+                    return mensajesRepository.save(g.get());
+                }
+            }
+        }
+        return c;
+    }
+
+    public boolean deleteMessage(int id) {
+        Optional<Mensajes> c = getMensaje(id);
+        if (!c.isEmpty()) {
+            mensajesRepository.delete(c.get());
+            return true;
+        }
+        return false;
+
+    }
 }

@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ciclo3</groupId>
-	<artifactId>Reto3</artifactId>
+	<artifactId>Reto4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Reto3</name>
-	<description>Reto3</description>
+	<name>Reto4</name>
+	<description>Reto4</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

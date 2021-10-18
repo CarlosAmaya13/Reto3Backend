@@ -42,4 +42,31 @@ public class GamaService {
             }
         }
     }
+
+    public Gama update(Gama c) {
+        if (c.getIdGama() != null) {
+            Optional<Gama> g = gamaRepository.getGama(c.getIdGama());
+            if (!g.isEmpty()) {
+                if (c.getName() != null) {
+                    g.get().setName(c.getName());
+                }
+                if (c.getDescription() != null) {
+                    g.get().setDescription(c.getDescription());
+                }
+                return gamaRepository.save(g.get());
+            }
+        }
+        return c;
+
+    }
+
+    public boolean deleteGama(int id) {
+        Optional<Gama> c = getGama(id);
+        if (!c.isEmpty()) {
+            gamaRepository.delete(c.get());
+            return true;
+        }
+        return false;
+
+    }
 }

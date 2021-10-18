@@ -42,4 +42,37 @@ public class CarService {
             }
         }
     }
+
+    public Car update(Car c) {
+        if (c.getIdCar() != null) {
+            Optional<Car> g = carRepository.getCar(c.getIdCar());
+            if (!g.isEmpty()) {
+                if (c.getName() != null) {
+                    g.get().setName(c.getName());
+                }
+                if (c.getDescription() != null) {
+                    g.get().setDescription(c.getDescription());
+                }
+
+                if (c.getBrand() != null) {
+                    g.get().setBrand(c.getBrand());
+                }
+                if (c.getYear() != null) {
+                    g.get().setYear(c.getYear());
+                }
+                return carRepository.save(g.get());
+            }
+        }
+        return c;
+
+    }
+
+    public boolean deleteCar(int id) {
+        Optional<Car> c = getCar(id);
+        if (!c.isEmpty()) {
+            carRepository.delete(c.get());
+            return true;
+        }
+        return false;
+    }
 }

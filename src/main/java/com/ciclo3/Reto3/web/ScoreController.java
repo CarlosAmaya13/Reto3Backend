@@ -5,8 +5,8 @@
  */
 package com.ciclo3.Reto3.web;
 
-import com.ciclo3.Reto3.model.Reservas;
-import com.ciclo3.Reto3.service.ReservasService;
+import com.ciclo3.Reto3.model.Score;
+import com.ciclo3.Reto3.service.ScoreService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,37 +28,38 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Carlos Andres
  */
 @RestController
-@RequestMapping("/api/Reservation")
+@RequestMapping("/api/Score")
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
-public class ReservasController {
+public class ScoreController {
 
     @Autowired
-    private ReservasService reservasService;
+    private ScoreService scoreService;
 
     @GetMapping("/all")
-    public List<Reservas> getPapelerias() {
-        return reservasService.getAll();
+    public List<Score> getScores() {
+        return scoreService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Reservas> getPapeleria(@PathVariable("id") int id) {
-        return reservasService.getReserva(id);
+    public Optional<Score> getScore(@PathVariable("id") int id) {
+        return scoreService.getScore(id);
     }
 
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservas save(@RequestBody Reservas p) {
-        return reservasService.save(p);
+    public Score save(@RequestBody Score p) {
+        return scoreService.save(p);
     }
+
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservas update(@RequestBody Reservas c){
-        return reservasService.update(c);
+    public Score update(@RequestBody Score c) {
+        return scoreService.update(c);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean deleteCategoria(@PathVariable("id") int id){
-        return reservasService.deleteReservation(id);
+    public boolean deleteScore(@PathVariable("id") int id) {
+        return scoreService.deleteScore(id);
     }
 }

@@ -33,4 +33,8 @@ public class ReservasRepository {
     public Reservas save(Reservas p) {
         return reservasCrudRepository.save(p);
     }
+
+    public void delete(Reservas c) {
+        reservasCrudRepository.delete(c);
+    }
 }
