@@ -6,6 +6,9 @@
 package com.ciclo3.Reto3.web;
 
 import com.ciclo3.Reto3.model.Reservas;
+import com.ciclo3.Reto3.model.custom.CountCar;
+import com.ciclo3.Reto3.model.custom.CountClient;
+import com.ciclo3.Reto3.model.custom.StatusAmount;
 import com.ciclo3.Reto3.service.ReservasService;
 import java.util.List;
 import java.util.Optional;
@@ -60,5 +63,31 @@ public class ReservasController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean deleteCategoria(@PathVariable("id") int id){
         return reservasService.deleteReservation(id);
+    }
+    
+    //RETO 5
+
+    @GetMapping("/report-cars")
+    public List<CountCar> getReservationsReportCar(){
+        return reservasService.getTopCars();
+    }
+
+    @GetMapping("/report-clients")
+    public List<CountClient> getReservationsReportClient(){
+        return reservasService.getTopClients();
+    }
+
+    @GetMapping("/report-dates/{dateOne}/{dateTwo}")
+    public List<Reservas> getReservationsReportDates(@PathVariable("dateOne") String dateOne,@PathVariable("dateTwo") String dateTwo){
+        return reservasService.getReservationsPeriod(dateOne,dateTwo);
+    }
+    @GetMapping("/report-dates/amount/{dateOne}/{dateTwo}")
+    public Integer getReservationsReportDatesAmount(@PathVariable("dateOne") String dateOne,@PathVariable("dateTwo") String dateTwo){
+        return reservasService.getReservationsPeriod(dateOne,dateTwo).size();
+    }
+
+    @GetMapping("/report-status")
+    public StatusAmount getReservationsStatusReport(){
+        return reservasService.getReservationsStatusReport();
     }
 }
