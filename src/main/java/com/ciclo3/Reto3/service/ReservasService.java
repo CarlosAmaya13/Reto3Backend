@@ -112,38 +112,61 @@ public class ReservasService {
         return false;
 
     }
-    
+
     //RETO 5
-    public List<CountCar> getTopCars(){
+    /**
+     * Get topCars
+     *
+     * @return reservasrepository
+     */
+    public List<CountCar> getTopCars() {
         return reservasRepository.getTopCars();
     }
 
-    public List<CountClient> getTopClients(){
+    /**
+     * Get topClients
+     *
+     * @return reservasrepository
+     */
+    public List<CountClient> getTopClients() {
         return reservasRepository.getTopClients();
     }
 
-    public List<Reservas> getReservationsPeriod(String dateA, String dateB){
-        SimpleDateFormat parser=new SimpleDateFormat("yyyy-MM-dd");
-        Date a= new Date();
-        Date b=new Date();
+    /**
+     * Get ReservationsPeriod
+     *
+     * @param dateA
+     * @param dateB
+     * @return reservasrepository
+     */
+    public List<Reservas> getReservationsPeriod(String dateA, String dateB) {
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        Date a = new Date();
+        Date b = new Date();
         try {
             a = parser.parse(dateA);
             b = parser.parse(dateB);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(a.before(b)){
-            return reservasRepository.getReservationPeriod(a,b);
-        }else{
+        if (a.before(b)) {
+            return reservasRepository.getReservationPeriod(a, b);
+        } else {
             return new ArrayList<>();
         }
 
     }
-    public StatusAmount getReservationsStatusReport(){
-        List<Reservas>completed=reservasRepository.getReservationsByStatus("completed");
-        List<Reservas>cancelled=reservasRepository.getReservationsByStatus("cancelled");
-        return new StatusAmount(completed.size(),cancelled.size());
+
+    /**
+     * Get ReservationStatusReport
+     *
+     * @return StatusAmount
+     */
+    public StatusAmount getReservationsStatusReport() {
+        List<Reservas> completed = reservasRepository.getReservationsByStatus("completed");
+        List<Reservas> cancelled = reservasRepository.getReservationsByStatus("cancelled");
+        return new StatusAmount(completed.size(), cancelled.size());
 
     }
-    
+
 }
